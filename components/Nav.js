@@ -9,11 +9,11 @@ export default function Nav() {
   const { openCart } = useCart();
   return (
     <NavStyles>
-      <Link href="/products">Products</Link>
+      <Link href="/products" prefetch={false}>Products</Link>
       {user && (
         <>
-          <Link href="/sell">Sell</Link>
-          <Link href="/orders">Orders</Link>
+          <Link href="/sell" prefetch={false}>Sell</Link>
+          <Link href="/orders" prefetch={false}>Orders</Link>
           <SignOut />
           <button type="button" onClick={openCart}>
             My Cart{" "}
@@ -29,7 +29,7 @@ export default function Nav() {
       )}
       {!user && (
         <>
-          <Link href="/signin">Sign In</Link>
+          <Link href="/signin" prefetch={false}>Sign In</Link>
         </>
       )}
     </NavStyles>

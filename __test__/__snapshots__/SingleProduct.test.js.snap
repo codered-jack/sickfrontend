@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Single Product/> renders with proper data 1`] = `
+<div>
+  <div
+    class="SingleProduct__ProductStyles-sc-1kapz8w-0 hxsXDc"
+    data-testid="singleProduct"
+  >
+    <img />
+    <div
+      class="details"
+    >
+      <h2 />
+      <p />
+    </div>
+  </div>
+</div>
+`;

@@ -32,9 +32,9 @@ const CREATE_PRODUCT_MUTATION = gql`
 function CreateProduct() {
   const { inputs, handleChange, clearForm, resetForm } = useForm({
     image: "",
-    name: "Nice Shoes",
-    price: 34234,
-    description: "These are the best shoes!",
+    name: "",
+    price: 0,
+    description: "",
   });
 
   const [createProduct, { loading, error, data }] = useMutation(
@@ -49,10 +49,11 @@ function CreateProduct() {
     e.preventDefault();
     await createProduct();
     clearForm();
-    console.log(data)
-    Router.push({
-        pathname:`/product/${data?.createProduct.id}`,
+    if(data){
+      Router.push({
+        pathname:`/product/${data?.createProduct?.id}`,
     })
+    }
   }
 
   return (
@@ -109,3 +110,5 @@ function CreateProduct() {
   );
 }
 export default CreateProduct;
+
+export {CREATE_PRODUCT_MUTATION}

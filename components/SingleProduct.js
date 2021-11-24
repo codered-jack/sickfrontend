@@ -1,23 +1,22 @@
-import { useQuery } from "@apollo/client";
-import gql from "graphql-tag";
-import DisplayError from "./ErrorMessage";
-import Head from "next/head";
-import styled from "styled-components"
+import { useQuery } from '@apollo/client';
+import gql from 'graphql-tag';
+import Head from 'next/head';
+import styled from 'styled-components';
+import DisplayError from './ErrorMessage';
 
 const ProductStyles = styled.div`
-    display:grid;
-    grid-auto-columns: 1fr;
-    grid-auto-flow: column;
-    max-width: var(--maxWidth);
-    justify-content:center;
-    align-items: top;
-    gap:2rem;
-    img {
-        width: 100%;
-        height:100%;
-        object-fit: contain;
-    }
-`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  max-width: var(--maxWidth);
+  justify-content: center;
+  align-items: top;
+  gap: 2rem;
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+`;
 
 const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
@@ -27,6 +26,7 @@ const SINGLE_ITEM_QUERY = gql`
       description
       id
       photo {
+        id
         altText
         image {
           publicUrlTransformed
@@ -38,28 +38,28 @@ const SINGLE_ITEM_QUERY = gql`
 
 export default function SingleProduct({ id }) {
   const { data, loading, error } = useQuery(SINGLE_ITEM_QUERY, {
-    variables: { id },
+    variables: {
+      id,
+    },
   });
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  if (error) {
-    return <DisplayError error={error} />;
-  }
-  const { Product } = data;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <DisplayError error={error} />;
+  const Product = data?.Product;
   return (
-    <ProductStyles>
+    <ProductStyles data-testid="singleProduct">
       <Head>
-        <title>Sick Fits | {Product.name}</title>
+        <title>Sick Fits | {Product?.name}</title>
       </Head>
       <img
-        src={Product.photo.image.publicUrlTransformed}
-        alt={Product.photo.altText}
+        src={Product?.photo.image.publicUrlTransformed}
+        alt={Product?.photo.altText}
       />
       <div className="details">
-        <h2>{Product.name}</h2>
-        <p>{Product.description}</p>
+        <h2>{Product?.name}</h2>
+        <p>{Product?.description}</p>
       </div>
     </ProductStyles>
   );
 }
+
+export {SINGLE_ITEM_QUERY}
