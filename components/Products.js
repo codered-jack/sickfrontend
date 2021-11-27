@@ -12,6 +12,7 @@ export const ALL_PRODUCTS_QUERY = gql`
       price
       description
       photo {
+        id
         image {
           publicUrlTransformed
         }

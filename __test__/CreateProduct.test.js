@@ -73,7 +73,7 @@ describe('<CreateProduct/>', () => {
       {
         request: {
           query: ALL_PRODUCTS_QUERY,
-          variables: { skip: 0, first: 2 },
+          variables: { skip: 0  },
         },
         result: {
           data: {
